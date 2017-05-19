@@ -1,0 +1,23 @@
+;/**
+;*  Copyright © Spider Financial Corp - All rights reserved.
+;*  Unauthorized copying of this file, via any medium is strictly prohibited
+;*  	Proprietary and confidential
+;*  
+;*  $Revision: 15310 $
+;*  $Date: 2016-05-05 16:48:43 -0500 (Thu, 05 May 2016) $
+;*/
+
+VERSION		1.64
+LIBRARY   SFMSG.DLL
+
+;  entryname[=internalname] [@ordinal [NONAME]] [PRIVATE] [DATA]
+EXPORTS
+ SFMSG_Init             @100  NONAME
+ SFMSG_LCID             @105  NONAME
+ SFMSG_LCID_SUPPORTED   @107  NONAME
+ SFMSG_NEUTRAL_LCID     @108  NONAME
+ SFMSG_LCID_PATH        @109  NONAME
+ SFMSG_Shutdown         @110  NONAME
+ SFMSG_Reset            @115  NONAME
+ SFMSG_MSG              @120  NONAME
+

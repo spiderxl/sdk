@@ -1,0 +1,19 @@
+;/**
+;*  (c) 2007-2014 Spider Financial Corp.
+;*  All rights reserved.
+;*  
+;*  $Revision: 15249 $
+;*  $Date: 2016-05-03 10:15:33 -0500 (Tue, 03 May 2016) $
+;*/
+
+VERSION		1.64
+LIBRARY   SFLOG.dll
+
+;  entryname[=internalname] [@ordinal [NONAME]] [PRIVATE] [DATA]
+EXPORTS
+  SFLOG_Init      @100  NONAME
+  SFLOG_Shutdown  @105  NONAME
+  SFLOG_LogMsg    @110  NONAME
+  SFLOG_GETLEVEL  @115  NONAME
+  SFLOG_SETLEVEL  @120  NONAME
+

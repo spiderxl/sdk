@@ -1,0 +1,311 @@
+;/**
+;  Copyright © Spider Financial Corp - All rights reserved.
+;  Unauthorized copying of this file, via any medium is strictly prohibited
+;   Proprietary and confidential
+;*  
+;*  $Revision: 15927 $
+;*  $Date: 2016-09-22 13:23:44 -0500 (Thu, 22 Sep 2016) $
+;*/
+VERSION			1.64
+LIBRARY     SFSDK.dll
+
+;  entryname[=internalname] [@ordinal [NONAME]] [PRIVATE] [DATA]
+EXPORTS
+  NDK_Init        @100  NONAME
+  NDK_Shutdown    @105  NONAME
+  NDK_RNG_SEED    @106  NONAME
+  NDK_INFO        @110  NONAME
+  NDK_MSG         @115  NONAME
+
+  ; Time Series statistics
+  NDK_ACF         @200   NONAME
+  NDK_ACF_ERROR   @205   NONAME
+  NDK_ACFCI       @210   NONAME
+  NDK_PACF        @215   NONAME
+  NDK_PACF_ERROR  @220   NONAME
+  NDK_PACFCI      @225   NONAME
+  NDK_PERIODOGRAM @226   NONAME
+
+  ; Statistical Test
+  NDK_ACFTEST       @300   NONAME
+  NDK_NORMALTEST    @301   NONAME
+  NDK_WNTEST        @302   NONAME
+  NDK_ARCHTEST      @303   NONAME
+  NDK_MEANTEST      @304   NONAME
+  NDK_STDEVTEST     @305   NONAME
+  NDK_SKEWTEST      @306   NONAME
+  NDK_XKURTTEST     @307   NONAME
+  NDK_XCFTEST       @308   NONAME
+  NDK_ADFTEST       @309   NONAME
+  ;NDK_KPSSTEST     @310   NONAME
+  NDK_JOHANSENTEST  @311  NONAME
+  NDK_COLNRTY_TEST  @312  NONAME
+  NDK_CHOWTEST      @313  NONAME
+
+  ; General statistics
+  NDK_GINI            @400  NONAME
+  NDK_XCF             @401  NONAME
+  NDK_XKURT           @403  NONAME
+  NDK_SKEW            @404  NONAME
+  NDK_AVERAGE         @405  NONAME
+  NDK_VARIANCE        @406  NONAME
+  NDK_MIN             @407  NONAME
+  NDK_MAX             @408  NONAME
+  NDK_HURST_EXPONENT  @409  NONAME
+  NDK_QUANTILE        @410  NONAME
+  NDK_IQR             @411  NONAME
+  NDK_RMS             @412  NONAME
+  NDK_MD              @413  NONAME
+  NDK_RMD             @414  NONAME
+  NDK_MAD             @415  NONAME
+  NDK_LRVAR           @416  NONAME
+  NDK_SAD             @417  NONAME
+  NDK_MAE             @418  NONAME
+  NDK_MAPE            @419  NONAME
+  NDK_RMSE            @420  NONAME
+  NDK_SSE             @421  NONAME
+  NDK_SORT_ASC        @422  NONAME
+
+
+  ; Statistical distribution
+  NDK_GED_XKURT               @500  NONAME
+  NDK_TDIST_XKURT             @501  NONAME
+  NDK_EDF                     @502  NONAME
+  NDK_HIST_BINS               @503  NONAME
+  NDK_HIST_BIN_LIMIT          @504  NONAME
+  NDK_HISTOGRAM               @505  NONAME
+  NDK_KERNEL_DENSITY_ESTIMATE @506  NONAME
+  NDK_GAUSS_FORECI            @507  NONAME
+  NDK_TSTUDENT_FORECI         @508  NONAME
+  NDK_GED_FORECI              @509  NONAME
+
+  ; Random number generator
+  NDK_GAUSS_RNG               @520 NONAME
+
+
+  ; ARMA Function
+  NDK_ARMA_GOF      @600  NONAME
+  NDK_ARMA_RESID    @601  NONAME
+  NDK_ARMA_FITTED   @602  NONAME
+  NDK_ARMA_FORE     @603  NONAME
+  NDK_ARMA_SIM      @604  NONAME
+  NDK_ARMA_PARAM    @605  NONAME
+  NDK_ARMA_VALIDATE @606  NONAME
+
+
+  ; ARIMA Function
+  NDK_ARIMA_GOF       @610  NONAME
+  NDK_ARIMA_FITTED    @612  NONAME
+  NDK_ARIMA_FORE      @613  NONAME
+  NDK_ARIMA_SIM       @614  NONAME
+  NDK_ARIMA_PARAM     @615  NONAME
+  NDK_ARIMA_VALIDATE  @616 NONAME
+
+  ; FARIMA Function
+  NDK_FARIMA_GOF    @620  NONAME
+  NDK_FARIMA_FITTED @622  NONAME
+  NDK_FARIMA_FORE   @623  NONAME
+  NDK_FARIMA_SIM    @624  NONAME
+  NDK_FARIMA_PARAM  @625  NONAME
+
+  ; SARIMA Function
+  NDK_SARIMA_GOF    @630  NONAME
+  NDK_SARIMA_FITTED @632  NONAME
+  NDK_SARIMA_FORE   @633  NONAME
+  NDK_SARIMA_SIM    @634  NONAME
+  NDK_SARIMA_PARAM  @635  NONAME
+  NDK_SARIMA_VALIDATE  @636 NONAME
+
+  ; AirLine Function
+  NDK_AIRLINE_GOF       @640  NONAME
+  NDK_AIRLINE_RESID     @641  NONAME
+  NDK_AIRLINE_FITTED    @642  NONAME
+  NDK_AIRLINE_FORE      @643  NONAME
+  NDK_AIRLINE_SIM       @644  NONAME
+  NDK_AIRLINE_PARAM     @645  NONAME
+  NDK_AIRLINE_VALIDATE  @646  NONAME
+
+
+  ; GARCH Function
+  NDK_GARCH_GOF       @650  NONAME
+  NDK_GARCH_RESID     @651  NONAME
+  NDK_GARCH_FITTED    @652  NONAME
+  NDK_GARCH_FORE      @653  NONAME
+  NDK_GARCH_SIM       @654  NONAME
+  NDK_GARCH_PARAM     @655  NONAME
+  NDK_GARCH_VALIDATE  @656  NONAME
+  NDK_GARCH_LRVAR     @657  NONAME
+
+
+  ; EGARCH Function
+  NDK_EGARCH_GOF      @660  NONAME
+  NDK_EGARCH_RESID    @661  NONAME
+  NDK_EGARCH_FITTED   @662  NONAME
+  NDK_EGARCH_FORE     @663  NONAME
+  NDK_EGARCH_SIM      @664  NONAME
+  NDK_EGARCH_PARAM    @665  NONAME
+  NDK_EGARCH_VALIDATE @666  NONAME
+  NDK_EGARCH_LRVAR    @667  NONAME
+
+  ; GARCHM Function
+  NDK_GARCHM_GOF      @670  NONAME
+  NDK_GARCHM_RESID    @671  NONAME
+  NDK_GARCHM_FITTED   @672  NONAME
+  NDK_GARCHM_FORE     @673  NONAME
+  NDK_GARCHM_SIM      @674  NONAME
+  NDK_GARCHM_PARAM    @675  NONAME
+  NDK_GARCHM_VALIDATE @676  NONAME
+  NDK_GARCHM_LRVAR    @677  NONAME
+
+  ; ARMAX Function
+  NDK_ARMAX_GOF     @690  NONAME
+  NDK_ARMAX_RESID   @691  NONAME
+  NDK_ARMAX_FITTED  @692  NONAME
+  NDK_ARMAX_FORE    @693  NONAME
+  NDK_ARMAX_SIM     @694  NONAME
+  NDK_ARMAX_PARAM   @695  NONAME
+
+  ; ARIMAX Function
+  NDK_ARIMAX_GOF     @700  NONAME
+  NDK_ARIMAX_RESID   @701  NONAME
+  NDK_ARIMAX_FITTED  @702  NONAME
+  NDK_ARIMAX_FORE    @703  NONAME
+  NDK_ARIMAX_SIM     @704  NONAME
+  NDK_ARIMAX_PARAM   @705  NONAME
+
+  ; GLM Function
+  NDK_GLM_GOF        @710  NONAME
+  NDK_GLM_RESID      @711  NONAME
+  NDK_GLM_FITTED     @712  NONAME
+  NDK_GLM_FORE       @713  NONAME
+  NDK_GLM_PARAM      @714  NONAME
+  NDK_GLM_VALIDATE   @715  NONAME
+
+  ; SLR and MLR models
+  NDK_SLR_PARAM      @720 NONAME
+  NDK_SLR_FORE       @721 NONAME
+  NDK_SLR_FITTED     @722 NONAME
+  NDK_SLR_ANOVA      @723 NONAME
+  NDK_SLR_GOF        @724 NONAME
+
+  NDK_MLR_PARAM      @730 NONAME
+  NDK_MLR_FORE       @731 NONAME
+  NDK_MLR_FITTED     @732 NONAME
+  NDK_MLR_ANOVA      @733 NONAME
+  NDK_MLR_GOF        @734 NONAME
+  NDK_MLR_STEPWISE   @735 NONAME
+  NDK_MLR_PRFTest    @736 NONAME
+
+
+  ; PCA
+  NDK_PCA_COMP       @740 NONAME
+  NDK_PCA_VAR        @741 NONAME
+  NDK_PCR_PARAM      @742 NONAME
+  NDK_PCR_FORE       @743 NONAME
+  NDK_PCR_FITTED     @744 NONAME
+  NDK_PCR_ANOVA      @745 NONAME
+  NDK_PCR_GOF        @746 NONAME
+  NDK_PCR_STEPWISE   @747 NONAME
+  NDK_PCR_PRFTest    @748 NONAME
+  
+  ; SARIMAX
+  NDK_SARIMAX_GOF       @750 NONAME
+  NDK_SARIMAX_FITTED    @751  NONAME
+  NDK_SARIMAX_FORE      @752  NONAME
+  NDK_SARIMAX_SIM       @753  NONAME
+  NDK_SARIMAX_PARAM     @754  NONAME
+  NDK_SARIMAX_VALIDATE   @755 NONAME
+
+  ; Time serier operators
+  NDK_LAG         @1000 NONAME
+  NDK_DIFF        @1005 NONAME
+  NDK_DIFFM       @1006 NONAME
+
+  NDK_INTEG       @1010 NONAME
+  NDK_EWMA        @1015 NONAME
+  NDK_EWXCF       @1020 NONAME
+  NDK_ADD         @1021 NONAME
+  NDK_SUB         @1022 NONAME
+  NDK_SCALE       @1023 NONAME
+  NDK_REVERSE     @1024 NONAME
+  NDK_RESAMPLE    @1025 NONAME
+
+  ; Spectral Analysis
+  NDK_DFT                           @1030 NONAME
+  NDK_IDFT                          @1031 NONAME
+  NDK_CONVOLUTION                   @1032 NONAME
+  NDK_HodrickPrescotFilter          @1033 NONAME
+  NDK_BaxterKingFilter              @1034 NONAME
+
+  ; Smoothing functions
+  NDK_WMA                   @2000  NONAME
+  NDK_SESMTH                @2005  NONAME 
+  NDK_DESMTH                @2010  NONAME
+  NDK_LESMTH                @2015  NONAME
+  NDK_TESMTH                @2020  NONAME
+  NDK_TREND                 @2021  NONAME
+
+  ; Utilities Function
+  NDK_INTERPOLATE     @3000 NONAME
+  NDK_REGRESSION      @3005 NONAME
+  NDK_REGEX_MATCH     @3010 NONAME
+  NDK_REGEX_REPLACE   @3015 NONAME
+  NDK_TOKENIZE        @3020 NONAME
+  NDK_DEFAULT_EDITOR  @3025 NONAME
+
+  ; Transform
+  NDK_INTERP_NAN    @4000 NONAME
+  NDK_RMNA          @4001 NONAME
+  NDK_BOXCOX        @4002 NONAME
+  NDK_LOGIT         @4003 NONAME
+  NDK_PROBIT        @4004 NONAME
+  NDK_CLOGLOG       @4005 NONAME
+  NDK_DETREND       @4010 NONAME  ; Detrend a univariate time series
+  NDK_INTERP_BROWN  @4015 NONAME
+  NDK_DETRENDM      @4016 NONAME  ; Detrend a multi-variate
+  NDK_RMSEASONAL    @4017 NONAME  ; Remove seasonality
+  NDK_HASNA         @4018 NONAME  ; examine the array for missing values
+
+  ; X-12-ARIMA Functions
+  NDK_X12_ENV_INIT      @5000 NONAME  ; Prepare the X12-ARIMA scripting environment
+  NDK_X12_ENV_CLEANUP   @5002 NONAME  ; Cleanup all files created by ARIMA program
+  NDK_X12_SCEN_INIT     @5005 NONAME  ; Prepare the X12 Model
+  NDK_X12_SCEN_CLEAUP   @5007 NONAME  ; cleanup all temp files
+  NDK_X12_DATA_FILE     @5010 NONAME  ; Write the data to the disk
+  NDK_X12_SPC_FILE      @5015 NONAME  ; Write teh SPC file to the disk
+  NDK_X12_RUN_BATCH     @5020 NONAME  ; Run the X12a program
+  NDK_X12_RUN_SCENARIO  @5022 NONAME  ; Run the scenario selected
+  NDK_X12_RUN_STAT      @5025 NONAME  ; Examine the status of running X12a program
+  NDK_X12_OUT_FILE      @5030 NONAME  ; return the full name of the x12a output file
+  NDK_X12_OUT_SERIES    @5035 NONAME  ; return the output time series (seasonally adjusted)
+  NDK_X12_FORE_SERIES   @5040 NONAME  ; return the forecast output time series
+
+  ; X13ARIMA-SEATS Functions
+  NDK_X13_ENV_INIT        @5100 NONAME  ; prepare the X13ARIMA scripting environment
+  NDK_X13_ENV_CLEANUP     @5102 NONAME  ; Cleanup all files created by X13ARIMA program
+  NDK_X13_SCEN_INIT       @5105 NONAME  ; Prepare the X13 Model
+  NDK_X13_SCEN_CLEAUP     @5107 NONAME  ; cleanup all temp files related to a scenario (Model)
+  NDK_X13_DATA_FILE       @5110 NONAME  ; Write the data to the disk
+  NDK_X13_HOLIDAY_FILE    @5112 NONAME  ; Write the holiday dates to the disk
+  NDK_X13_USER_EVENT_FILE     @5115 NONAME  ; write user-defined list of dates to the disk
+  NDK_X13_ADD_EVENT_FACTOR    @5116 NONAME  ; Add a holiday or user-defined factor to a scenario
+  NDK_X13_REGRESSORS_SETTING  @5117 NONAME  ; Define the global settings for regressor variables
+  NDK_X13_RUN_GENHOL          @5118 NONAME  ; Convert the regressors.ini to genhol input file, and run the program
+  NDK_X13_RUN_BATCH           @5119 NONAME  ; run a batch file in X13A folder
+  NDK_X13_SPC_SERIES_SETTING    @5120 NONAME  ; define the data section in the SPC file
+  NDK_X13_SPC_TRANSFORM_SETTING @5121 NONAME  ; define the transform section of the SPC file
+  NDK_X13_SPC_PRIOR_ADJUST_SETTING  @5122 NONAME  ; define the prior adjustment section of the SPC file.
+  NDK_X13_SPC_X11_SETTING           @5123 NONAME  ; define the X11 section of the SPC file
+  NDK_X13_SPC_SEATS_SETTING         @5124 NONAME  ; define the SEATS section of the SPC file
+  NDK_X13_WRITE_SPC_FILE            @5125 NONAME  ; write the <scenario>.spc file from user options ini file.
+  NDK_X13_RUN_SPC_FILE              @5126 NONAME  ; run the X13AS to generate the output files.
+  NDK_X13AS_OUT_FILE                @5127 NONAME  ; open the output file in notepad
+  NDK_X13_SCEN_REFRESH              @5128 NONAME  ; refresh the status of different intermediate and output files.
+  NDK_X13AS_OUT_SERIES              @5129 NONAME  ; return the output series, using a series symbol
+
+
+  ; Portfolio Analysis Function
+  NDK_PORTFOLIO_RET         @5500 NONAME  ; Compute the portfolio equivalent returns
+  NDK_PORTFOLIO_VARIANCE    @5502 NONAME  ; Compute the portfolio equivalent variance
+  NDK_PORTFOLIO_COVARIANCE  @5504 NONAME  ; Compute the covariance between two portfolios, given their assets' weights
+
