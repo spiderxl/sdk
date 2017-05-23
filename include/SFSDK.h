@@ -12,7 +12,7 @@
 *  @author Spider Financial Corp
 *  @version 1.62
 *  @see http://www.spiderfinancial.com
-*  $Date: 2016-09-30 17:07:28 -0500 (Fri, 30 Sep 2016) $
+*  $Date: 2017-04-18 15:37:49 -0500 (Tue, 18 Apr 2017) $
 */
 #pragma once
 
@@ -428,6 +428,20 @@ extern "C"
                             WORD reserved,  ///< [in] This parameter is reserved and must be 1.
                             double* retVal  ///< [out] is the calculated average value.
                             );
+
+  /*!
+  *   \brief Calculates the geometric mean of the sample
+  *   \return status code of the operation
+  *   \retval #NDK_SUCCESS Operation successful
+  *   \retval #NDK_FAILED Operation unsuccessful. See \ref SFMacros.h for more details.
+  *   \sa NDK_AVERAGE()
+  */
+  int __stdcall NDK_GMEAN(double* X,      ///< [in] is the input data sample (a one dimensional array).
+                          size_t N,       ///< [in] is the number of observations in X.
+                          WORD reserved,  ///< [in] This parameter is reserved and must be 1.
+                          double* retVal  ///< [out] is the calculated geometric average value.
+                        );
+
   /*! 
   *   \brief Calculates the sample variance.
   *   \return status code of the operation
@@ -777,6 +791,18 @@ extern "C"
 						size_t N,        ///< [in] is the number of observations in X.
 						double* retVal   ///< [out] is the calculated value of this function.
 						);
+
+
+  int __stdcall NDK_MASE(double* X,      ///< [in] is the original (eventual outcomes) time series sample data (a one dimensional array). 
+                        double* Y,       ///< [in] is the forecast time series data (a one dimensional array). 
+                        size_t N,        ///< [in] is the number of observations in X.
+                        size_t M,        ///< [in] is the seasonal period (for non-seasonal time series, set M=1).
+                        double* retVal   ///< [out] is the calculated value of this function.
+                      );
+
+
+
+
   /*! 
   *   \brief Calculates the mean absolute percentage error (deviation) function for the forecast and the eventual outcomes.
   *   \return status code of the operation
@@ -808,6 +834,22 @@ extern "C"
 						 double* retVal   ///< [out] is the calculated value of this function.
 						 );
 
+
+  int __stdcall NDK_MdAPE(double* X,     ///< [in] is the original (eventual outcomes) time series sample data (a one dimensional array). 
+                        double* Y,       ///< [in] is the forecast time series data (a one dimensional array). 
+                        size_t N,        ///< [in] is the number of observations in X.
+                        BOOL   SMAPE,    ///< [in] is a switch to select the scale to divide on: FALSE = Actual obs., TRUE= Average (Actual, Forecast)
+                        double* retVal   ///< [out] is the calculated value of this function.
+                      );
+
+  int __stdcall NDK_MAAPE(double* X,     ///< [in] is the original (eventual outcomes) time series sample data (a one dimensional array). 
+                        double* Y,       ///< [in] is the forecast time series data (a one dimensional array). 
+                        size_t N,        ///< [in] is the number of observations in X.
+                        double* retVal   ///< [out] is the calculated value of this function.
+                      );
+
+
+
   /*! 
   *   \brief Calculates the root mean squared error (aka root mean squared deviation (RMSD)) function.
   *   \return status code of the operation
@@ -824,6 +866,15 @@ extern "C"
 						 double* retVal    ///< [out] is the calculated value of this function.
 						 );
 
+  
+  
+  int __stdcall NDK_GRMSE(double* X,        ///< [in] is the original (eventual outcomes) time series sample data (a one dimensional array).
+                          double* Y,        ///< [in] is the forecast time series data (a one dimensional array). 
+                          size_t N,         ///< [In] is the number of observations in X.
+                          double* retVal    ///< [out] is the calculated value of this function.
+                        );
+  
+  
   /*! 
   *   \brief Calculates the sum of the squared errors of the prediction function.
   *   \return status code of the operation
@@ -843,6 +894,67 @@ extern "C"
 						size_t N,		    ///< [in] is the number of observations in X.
 						double* retVal	    ///< [out] is the calculated sum of squared errors.
 						);
+
+
+  /*!
+  *   \brief Calculates the mean squared errors of the prediction function.
+  *   \return status code of the operation
+  *   \retval #NDK_SUCCESS Operation successful
+  *   \retval #NDK_FAILED Operation unsuccessful. See \ref SFMacros.h for more details.
+  *	  \note 1. The two data sets must be identical in size.
+  *   \note 2. A missing value (e.g. \f$x_k\f$ or \f$\hat x_k\f$) in either time series will exclude the data point \f$(x_k,\hat x_k)\f$ from the MSE.
+  *   \sa NDK_SSE()
+  */
+  int __stdcall NDK_MSE(double* X,		  ///< [in] is the original (eventual outcomes) time series sample data (a one dimensional array). 
+                        double* Y,		  ///< [in] is the forecasted time series data (a one dimensional array). 
+                        size_t N,		    ///< [in] is the number of observations in X.
+                        double* retVal	///< [out] is the calculated mean of squared errors.
+                      );
+
+
+  int __stdcall NDK_GMSE(double* X,		  ///< [in] is the original (eventual outcomes) time series sample data (a one dimensional array). 
+                        double* Y,		  ///< [in] is the forecasted time series data (a one dimensional array). 
+                        size_t N,		    ///< [in] is the number of observations in X.
+                        double* retVal	///< [out] is the calculated mean of squared errors.
+                      );
+
+
+
+
+  int __stdcall NDK_MRAE(double* X,		  ///< [in] is the original (eventual outcomes) time series sample data (a one dimensional array). 
+    double* Y,		                      ///< [in] is the forecasted time series data (a one dimensional array). 
+    size_t N,		                        ///< [in] is the number of observations in X.
+    size_t period,                      ///< [in] is the seasonal period (for non-seasonal time series, set M=1).
+    double* retVal	                    ///< [out] is the calculated mean of relative absolute error
+  );
+
+  int __stdcall NDK_MdRAE(double* X,		///< [in] is the original (eventual outcomes) time series sample data (a one dimensional array). 
+    double* Y,		                      ///< [in] is the forecasted time series data (a one dimensional array). 
+    size_t N,		                        ///< [in] is the number of observations in X.
+    size_t period,                      ///< [in] is the seasonal period (for non-seasonal time series, set M=1).
+    double* retVal	                    ///< [out] is the calculated median of relative absolute error
+  );
+
+
+
+  int __stdcall NDK_GMRAE(double* X,		  ///< [in] is the original (eventual outcomes) time series sample data (a one dimensional array). 
+      double* Y,		                      ///< [in] is the forecasted time series data (a one dimensional array). 
+      size_t N,		                        ///< [in] is the number of observations in X.
+      size_t period,                      ///< [in] is the seasonal period (for non-seasonal time series, set M=1).
+      double* retVal	                    ///< [out] is the calculated geometric mean of relative absolute error
+      );
+
+
+
+  int __stdcall NDK_PB(double* X,		    ///< [in] is the original (eventual outcomes) time series sample data (a one dimensional array). 
+    double* Y,		                      ///< [in] is the forecasted time series data (a one dimensional array). 
+    size_t N,		                        ///< [in] is the number of observations in X.
+    size_t period,                      ///< [in] is the seasonal period (for non-seasonal time series, set M=1).
+    WORD basis,                         ///< [in] is the switch to specify the metric used for comparison: 0=absolute error, 1=MAE, 2=MSE
+    double* retVal	                    ///< [out] is the calculated geometric mean of relative absolute error
+  );
+
+
 
   /*! 
   *   \brief Calculates the sample autocorrelation function (ACF) of a stationary time series.
@@ -1764,13 +1876,15 @@ extern "C"
   *   \retval #NDK_FAILED operation is unsuccessful (see \ref SFMacros.h)
   *   \sa NDK_WMA(), NDK_EWMA(), NDK_DESMTH(), NDK_TESMTH, NDK_LESMTH()
   */
-  int   __stdcall NDK_SESMTH(double *pData,     ///< [in] is the univariate time series data (a one dimensional array).
-                              size_t nSize,     ///< [in] is the number of elements in pData.
-                              BOOL bAscending,  ///< [in] is the time order in the data series (i.e. the first data point's corresponding date (earliest date=1 (default), latest date=0)).
-                              double* alpha,    ///< [in] is the smoothing factor (alpha should be between zero and one (exclusive)). If missing or omitted, a value of 0.333 is used.
-                              int nHorizon,     ///< [in] is the forecast time horizon beyond the end of X. If missing, a default value of 0 (latest or end of X) is assumed.
-                              BOOL bOptimize,   ///< [in] is a flag (True/False) for searching and using the optimal value of the smoothing factor. If missing or omitted, optimize is assumed false.
-                              double* retVal    ///< [out] is the calculated value of this function.
+  int   __stdcall NDK_SESMTH(double *pData,           ///< [in] is the univariate time series data (a one dimensional array).
+                              size_t nSize,           ///< [in] is the number of elements in pData.
+                              BOOL bAscending,        ///< [in] is the time order in the data series (i.e. the first data point's corresponding date (earliest date=1 (default), latest date=0)).
+                              double* alpha,          ///< [inout] is the smoothing factor (alpha should be between zero and one (exclusive)). If missing or omitted, a value of 0.333 is used.
+                              int nHorizon,           ///< [in] is the forecast time horizon beyond the end of X. If missing, a default value of 0 (latest or end of X) is assumed.
+                              BOOL bOptimize,         ///< [in] is a flag (True/False) for searching and using the optimal value of the smoothing factor. If missing or omitted, optimize is assumed false.
+                              double* internals,      ///< [out,opt] is an array of the intermediate forecast calculation.
+                              size_t  nInternalsSize, ///< [inout,opt] size of the output buffer, and number or values to return.
+                              double* retVal          ///< [out] is the calculated value of this function.
                               );
 
   /*! 
@@ -1787,6 +1901,9 @@ extern "C"
                             double *beta,       ///< [in] is the trend smoothing factor (beta should be between zero and one (exclusive)).
                             int xlHorizon,      ///< [in] is the forecast time horizon beyond the end of X. If missing, a default value of 0 (latest or end of X) is assumed.
                             BOOL bOptimize,     ///< [in] is a flag (True/False) for searching and using the optimal value of the smoothing factor. If missing or omitted, optimize is assumed false. 
+                            double* internals,      ///< [out,opt] is an array of the intermediate forecast calculation.
+                            size_t  nInternalsSize, ///< [in,opt] size of the output buffer, and number or values to return.
+                            WORD  wInternalSeries,  ///< [in, opt] a switch to select the series to return in internals ( 0 = Smoothing forecast, 1=level, 2=trend)
                             double* retVal      ///< [out] is the calculated value of this function.
                             );
 
@@ -1797,13 +1914,16 @@ extern "C"
   *   \retval #NDK_FAILED operation is unsuccessful (see \ref SFMacros.h)
   *   \sa NDK_WMA(), NDK_EWMA(), NDK_SESMTH(), NDK_TESMTH, NDK_DESMTH()
   */
-  int   __stdcall NDK_LESMTH( double *pData,    ///< [in] is the univariate time series data (a one dimensional array).
-                              size_t nSize,     ///< [in] is the number of elements in pData.
-                              BOOL bAscending,  ///< [in] is the time order in the data series (i.e. the first data point's corresponding date (earliest date=1 (default), latest date=0)).
-                              double *alpha,    ///< [in] is the smoothing factor (alpha should be between zero and one (exclusive)). If missing or omitted, a value of 0.333 is used.
-                              int xlHorizon,    ///< [in] is the forecast time horizon beyond the end of X. If missing, a default value of 0 (latest or end of X) is assumed.
-                              BOOL bOptimize,   ///< [in] is a flag (True/False) for searching and using the optimal value of the smoothing factor. If missing or omitted, optimize is assumed false. 
-                              double* retVal    ///< [out] is the calculated value of this function.
+  int   __stdcall NDK_LESMTH( double *pData,          ///< [in] is the univariate time series data (a one dimensional array).
+                              size_t nSize,           ///< [in] is the number of elements in pData.
+                              BOOL bAscending,        ///< [in] is the time order in the data series (i.e. the first data point's corresponding date (earliest date=1 (default), latest date=0)).
+                              double *alpha,          ///< [in] is the smoothing factor (alpha should be between zero and one (exclusive)). If missing or omitted, a value of 0.333 is used.
+                              int xlHorizon,          ///< [in] is the forecast time horizon beyond the end of X. If missing, a default value of 0 (latest or end of X) is assumed.
+                              BOOL bOptimize,         ///< [in] is a flag (True/False) for searching and using the optimal value of the smoothing factor. If missing or omitted, optimize is assumed false. 
+                              double* internals,      ///< [out,opt] is an array of the intermediate forecast calculation.
+                              size_t  nInternalsSize, ///< [in,opt] size of the output buffer, and number or values to return.
+                              WORD  wInternalSeries,  ///< [in, opt] a switch to select the series to return in internals ( 0 = Smoothing forecast, 1=level, 2=trend)
+                              double* retVal          ///< [out] is the calculated value of this function.
                               );
 
   /*! 
@@ -1813,17 +1933,49 @@ extern "C"
   *   \retval #NDK_FAILED operation is unsuccessful (see \ref SFMacros.h)
   *   \sa NDK_WMA(), NDK_EWMA(), NDK_SESMTH(), NDK_LESMTH, NDK_DESMTH()
   */
-  int   __stdcall NDK_TESMTH(double *pData,     ///< [in] is the univariate time series data (a one dimensional array).
-                              size_t nSize,     ///< [in] is the number of elements in pData.
-                              BOOL bAscending,  ///< [in] is the time order in the data series (i.e. the first data point's corresponding date (earliest date=1 (default), latest date=0)).
-                              double *alpha,    ///< [in] is the data smoothing factor (alpha should be between zero and one (exclusive)).
-                              double *beta,     ///< [in] is the trend smoothing factor (beta should be between zero and one (exclusive)).
-                              double *gamma,    ///< [in] is the seasonal change smoothing factor (Gamma should be between zero and one (exclusive)).
-                              int L,            ///< [in] is the season length.
-                              int nHorizon,     ///< [in] is the forecast time horizon beyond the end of X. If missing, a default value of 0 (latest or end of X) is assumed.
-                              BOOL bOptimize,   ///< [in] is a flag (True/False) for searching and using optimal value of the smoothing factor. If missing or omitted, optimize is assumed false. 
-                              double* retVal    ///< [out] is the calculated value of this function.
+  int   __stdcall NDK_TESMTH(double *pData,           ///< [in] is the univariate time series data (a one dimensional array).
+                              size_t nSize,           ///< [in] is the number of elements in pData.
+                              BOOL bAscending,        ///< [in] is the time order in the data series (i.e. the first data point's corresponding date (earliest date=1 (default), latest date=0)).
+                              double *alpha,          ///< [in] is the data smoothing factor (alpha should be between zero and one (exclusive)).
+                              double *beta,           ///< [in] is the trend smoothing factor (beta should be between zero and one (exclusive)).
+                              double *gamma,          ///< [in] is the seasonal change smoothing factor (Gamma should be between zero and one (exclusive)).
+                              int L,                  ///< [in] is the season length.
+                              int nHorizon,           ///< [in] is the forecast time horizon beyond the end of X. If missing, a default value of 0 (latest or end of X) is assumed.
+                              BOOL bOptimize,         ///< [in] is a flag (True/False) for searching and using optimal value of the smoothing factor. If missing or omitted, optimize is assumed false. 
+                              double* internals,      ///< [out,opt] is an array of the intermediate forecast calculation.
+                              size_t  nInternalsSize, ///< [in,opt] size of the output buffer, and number or values to return.
+                              WORD  wInternalSeries,  ///< [in, opt] a switch to select the series to return in internals ( 0 = Smoothing forecast, 1=level, 2=trend)
+                              double* retVal          ///< [out] is the calculated value of this function.
                               );
+
+
+  /*!
+  *   \brief Returns the (Winters's) triple exponential smoothing estimate of the value of X at time T+m.
+  *   \return status code of the operation
+  *   \retval #NDK_SUCCESS Operation successful
+  *   \retval #NDK_FAILED operation is unsuccessful (see \ref SFMacros.h)
+  *   \sa NDK_WMA(), NDK_EWMA(), NDK_SESMTH(), NDK_LESMTH, NDK_DESMTH()
+  */
+  int   __stdcall NDK_GESMTH(double *pData,          ///< [in] is the univariate time series data (a one dimensional array).
+    size_t nSize,             ///< [in] is the number of elements in pData.
+    BOOL bAscending,          ///< [in] is the time order in the data series (i.e. the first data point's corresponding date (earliest date=1 (default), latest date=0)).
+    double *alpha,            ///< [in] is the data smoothing factor (alpha should be between zero and one (exclusive)).
+    double *beta,             ///< [in] is the trend smoothing factor (beta should be between zero and one (exclusive)).
+    double *gamma,            ///< [in] is the seasonal change smoothing factor (Gamma should be between zero and one (exclusive)).
+    double *phi,              ///< [in] is the damping coefficient for the trend.
+    double *lambda,           ///< [in] is the coefficient value for the autocorrelation adjustment
+    WORD  TrendType,          ///< [in] is the type of trend in the model (0=none, 1=additive, 2- damped additive, 3=multiplicative, 4=damped multiplicative)
+    WORD  SeasonalityType,    ///< [in] is the type of seasonality in the modem (0=none, 1=additive, 2=multiplicative)
+    int seasonLength,         ///< [in] is the season length.
+    int nHorizon,             ///< [in] is the forecast time horizon beyond the end of X. If missing, a default value of 0 (latest or end of X) is assumed.
+    BOOL bOptimize,           ///< [in] is a flag (True/False) for searching and using optimal value of the smoothing factor. If missing or omitted, optimize is assumed false. 
+    BOOL bAutoCorrelationAdj, ///< [in] is a flag (True/False) for adding a correction term for the 1st ourder autocorrelation in the
+    BOOL bLogTransform,       ///< [in] is a flag (True/False) for applying natural log transform to the input data prior to smoothing.
+    double* internals,        ///< [out,opt] is an array of the intermediate forecast calculation.
+    size_t  nInternalsSize,   ///< [in,opt] size of the output buffer, and number or values to return.
+    WORD  wInternalSeries,    ///< [in, opt] a switch to select the series to return in internals ( 0 = one-step forecasting, 1=level, 2=trend, 3=seasonality)
+    double* retVal            ///< [out] is the calculated value of this function.
+  );
 
   /*! 
   *   \brief Returns values along a trend curve (e.g. linear, quadratic, exponential, etc.) at time T+m.

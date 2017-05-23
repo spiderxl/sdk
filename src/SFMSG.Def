@@ -1,5 +1,5 @@
 ;/**
-;*  Copyright Â© Spider Financial Corp - All rights reserved.
+;*  Copyright © Spider Financial Corp - All rights reserved.
 ;*  Unauthorized copying of this file, via any medium is strictly prohibited
 ;*  	Proprietary and confidential
 ;*  
@@ -7,7 +7,7 @@
 ;*  $Date: 2016-05-05 16:48:43 -0500 (Thu, 05 May 2016) $
 ;*/
 
-VERSION		1.64
+VERSION		1.65
 LIBRARY   SFMSG.DLL
 
 ;  entryname[=internalname] [@ordinal [NONAME]] [PRIVATE] [DATA]

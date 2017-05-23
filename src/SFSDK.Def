@@ -3,8 +3,8 @@
 ;  Unauthorized copying of this file, via any medium is strictly prohibited
 ;   Proprietary and confidential
 ;*  
-;*  $Revision: 15927 $
-;*  $Date: 2016-09-22 13:23:44 -0500 (Thu, 22 Sep 2016) $
+;*  $Revision: 16266 $
+;*  $Date: 2017-04-18 15:37:49 -0500 (Tue, 18 Apr 2017) $
 ;*/
 VERSION			1.64
 LIBRARY     SFSDK.dll
@@ -59,13 +59,26 @@ EXPORTS
   NDK_RMD             @414  NONAME
   NDK_MAD             @415  NONAME
   NDK_LRVAR           @416  NONAME
+  NDK_SORT_ASC        @422  NONAME
+  NDK_GMEAN           @423  NONAME
+  
+
+  ;Forecasting performance
+  NDK_SSE             @421  NONAME
   NDK_SAD             @417  NONAME
   NDK_MAE             @418  NONAME
-  NDK_MAPE            @419  NONAME
+  NDK_MSE             @450  NONAME
+  NDK_GMSE            @457  NONAME
   NDK_RMSE            @420  NONAME
-  NDK_SSE             @421  NONAME
-  NDK_SORT_ASC        @422  NONAME
-
+  NDK_GRMSE           @458  NONAME
+  NDK_MAPE            @419  NONAME
+  NDK_MdAPE           @454  NONAME
+  NDK_MAAPE           @455  NONAME
+  NDK_MRAE            @451  NONAME
+  NDK_MdRAE           @452  NONAME
+  NDK_GMRAE           @453  NONAME
+  NDK_MASE            @456  NONAME
+  NDK_PB              @459  NONAME
 
   ; Statistical distribution
   NDK_GED_XKURT               @500  NONAME
@@ -81,7 +94,6 @@ EXPORTS
 
   ; Random number generator
   NDK_GAUSS_RNG               @520 NONAME
-
 
   ; ARMA Function
   NDK_ARMA_GOF      @600  NONAME
@@ -243,6 +255,7 @@ EXPORTS
   NDK_DESMTH                @2010  NONAME
   NDK_LESMTH                @2015  NONAME
   NDK_TESMTH                @2020  NONAME
+  NDK_GESMTH                @2022  NONAME
   NDK_TREND                 @2021  NONAME
 
   ; Utilities Function

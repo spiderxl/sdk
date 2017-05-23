@@ -8,8 +8,8 @@
 *  \author Spider Financial Corp
 *  \version 1.62
 *  
-*  $Revision: 15834 $
-*  $Date: 2016-08-25 13:54:04 -0500 (Thu, 25 Aug 2016) $
+*  $Revision: 16206 $
+*  $Date: 2017-03-10 19:59:45 -0600 (Fri, 10 Mar 2017) $
 */
 #pragma once
 
@@ -56,6 +56,9 @@
 #define NDK_CALIBRATION_ERROR       -305  ///< FAILED: The optimizer failed to converge to a unique solution.
 #define NDK_INVALID_MODEL           -306  ///< FAILED: The model's parameters values did not pass the stability test.
 #define NDK_INSUFFICIENT_OBS        -307  ///< FAILED: The number of non-missing observations is not sufficient to carry on the requested function
+#define NDK_DIVIDE_BY_ZERO          -308  ///< FAILED: An attempt to divide by zero 
+#define NDK_IMAG_NUMBER             -309  ///< FAILED: Calculation yield an imaginary number
+#define NDK_INDETERMINATE_NUMBER    -310  ///< FAILED: Calculation involve zero divided by zero
 
 // Implementation status
 #define NDK_NOTSUPPORTED            -400  ///< FAILED: The required operation is not currently implemented/supported
